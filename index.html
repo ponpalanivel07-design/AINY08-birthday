@@ -16,6 +16,7 @@ body {
   color: #fff;
 }
 
+/* Tap Screen */
 #tapScreen {
   position: fixed;
   inset: 0;
@@ -39,6 +40,7 @@ body {
   100% { transform: scale(1); }
 }
 
+/* Main Content */
 .container {
   position: relative;
   top: 50%;
@@ -54,7 +56,7 @@ h2 {
 
 p {
   font-size: 1.15em;
-  line-height: 1.8;
+  line-height: 1.9;
   margin-top: 20px;
 }
 
@@ -73,6 +75,7 @@ p {
   to { text-shadow: 0 0 25px #ff4d6d; }
 }
 
+/* Flowers */
 .flower {
   position: fixed;
   top: -10%;
@@ -90,18 +93,18 @@ p {
 
 <body>
 
-<!-- Tap to reveal screen -->
+<!-- Tap to Reveal -->
 <div id="tapScreen" onclick="revealLove()">
   <h1>Tap to reveal 💖</h1>
   <p>Something special for you, Ainy ✨</p>
 </div>
 
-<!-- Music -->
-<audio id="music" loop>
+<!-- Background Music -->
+<audio id="music" loop playsinline>
   <source src="ohpenne.mp3" type="audio/mpeg">
 </audio>
 
-<!-- Main content -->
+<!-- Main Content -->
 <div class="container" id="content">
   <div class="heart">💖</div>
   <h2>Happy Birthday AINY 🎂</h2>
@@ -109,18 +112,23 @@ p {
   <p>
     Happy birthday Ainy 💕<br><br>
 
-    Ik you broke up nu… but na innum un kooda tha iruken.<br>
+    Ik you broke up nu…<br>
+    but na innum un kooda tha iruken.<br>
     I still love you 🤍<br><br>
 
-    un Birthday ah epovum miss pana matten…<br>
-    entha varasam analum na tha unaku first wish ah irupen 🥹<br><br>
+    Un birthday ah epovum miss pana matten…<br>
+    entha varasam analum,<br>
+    <b>na tha unaku first wish ah irupen</b> 🥹<br><br>
 
     I love you a lottttttttttttttttttttttttttt tho 💗<br>
     Wish you a very prosperous birthday ✨<br><br>
 
     Happy ah iru…<br>
     Do everything you like hereafter 🌸<br>
-    Nee major aagita… happy ah iru from your dear koala.💫
+    Nee major aagita… happy ah iru 🤍<br><br>
+
+    With lots of love,<br>
+    <b>your dear Koala 🐨💫</b>
   </p>
 
   <div class="heart">💞</div>
@@ -130,7 +138,13 @@ p {
 function revealLove() {
   document.getElementById("tapScreen").style.display = "none";
   document.getElementById("content").style.display = "block";
-  document.getElementById("music").play();
+
+  const music = document.getElementById("music");
+  music.currentTime = 0;
+  music.volume = 0.7;
+  music.play().catch(err => {
+    console.log("Audio blocked:", err);
+  });
 
   const flowers = ["🌸","🌺","🌷","🌹"];
   for (let i = 0; i < 30; i++) {
@@ -147,4 +161,3 @@ function revealLove() {
 
 </body>
 </html>
-
