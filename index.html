@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday Ainy 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
+  text-align: center;
+  color: #fff;
+}
+
+#tapScreen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  z-index: 10;
+  cursor: pointer;
+}
+
+#tapScreen h1 {
+  font-size: 2.5em;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.container {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 20px;
+  display: none;
+}
+
+h2 {
+  font-size: 2.6em;
+  animation: glow 2s infinite alternate;
+}
+
+p {
+  font-size: 1.15em;
+  line-height: 1.8;
+  margin-top: 20px;
+}
+
+.heart {
+  font-size: 3em;
+  animation: beat 1s infinite;
+}
+
+@keyframes beat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 10px #fff; }
+  to { text-shadow: 0 0 25px #ff4d6d; }
+}
+
+.flower {
+  position: fixed;
+  top: -10%;
+  font-size: 24px;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Tap to reveal screen -->
+<div id="tapScreen" onclick="revealLove()">
+  <h1>Tap to reveal 💖</h1>
+  <p>Something special for you, Ainy ✨</p>
+</div>
+
+<!-- Music -->
+<audio id="music" loop>
+  <source src="ohpenne.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Main content -->
+<div class="container" id="content">
+  <div class="heart">💖</div>
+  <h2>Happy Birthday AINY 🎂</h2>
+
+  <p>
+    Happy birthday Ainy 💕<br><br>
+
+    Ik you broke up nu… but na innum un kooda tha iruken.<br>
+    I still love you 🤍<br><br>
+
+    Birthday ah epovum miss pana matten…<br>
+    entha varasam analum na tha unaku first wish ah irupen 🥹<br><br>
+
+    I love you a lot 💗<br>
+    Wish you a very prosperous birthday ✨<br><br>
+
+    Happy ah iru…<br>
+    Do everything you like hereafter 🌸<br>
+    Nee major aayita… so always choose your happiness 💫
+  </p>
+
+  <div class="heart">💞</div>
+</div>
+
+<script>
+function revealLove() {
+  document.getElementById("tapScreen").style.display = "none";
+  document.getElementById("content").style.display = "block";
+  document.getElementById("music").play();
+
+  const flowers = ["🌸","🌺","🌷","🌹"];
+  for (let i = 0; i < 30; i++) {
+    let flower = document.createElement("div");
+    flower.className = "flower";
+    flower.innerHTML = flowers[Math.floor(Math.random() * flowers.length)];
+    flower.style.left = Math.random() * 100 + "vw";
+    flower.style.animationDuration = (5 + Math.random() * 5) + "s";
+    flower.style.fontSize = (18 + Math.random() * 20) + "px";
+    document.body.appendChild(flower);
+  }
+}
+</script>
+
+</body>
+</html>
