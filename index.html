@@ -2,75 +2,138 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Happy Birthday Ainy 💕</title>
+<title>Happy Birthday Ainy 💖</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Sacramento&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+<!-- Cute + dreamy Google font -->
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&family=Sacramento&display=swap" rel="stylesheet">
 
 <style>
-body{
-  margin:0;
-  height:100vh;
-  background:linear-gradient(135deg,#1b1b2f,#2a2a40);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-  font-family:'Poppins',sans-serif;
-  color:#fff;
+* {
+  box-sizing: border-box;
 }
 
-#tapScreen{
-  position:absolute;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:2em;
-  cursor:pointer;
-  background:rgba(0,0,0,0.9);
+body {
+  margin: 0;
+  height: 100vh;
+  background: radial-gradient(circle at top, #ffe6f0, #ffb6c1);
+  font-family: 'Quicksand', sans-serif;
+  overflow: hidden;
+  color: #fff;
+  text-align: center;
 }
 
-#card{
-  display:none;
-  background:rgba(255,255,255,0.08);
-  padding:30px;
-  border-radius:20px;
-  max-width:400px;
-  box-shadow:0 0 40px rgba(255,182,193,0.3);
-  backdrop-filter:blur(10px);
+/* Tap screen */
+#tapScreen {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  cursor: pointer;
 }
 
-h1{
-  font-family:'Sacramento',cursive;
-  font-size:3em;
-  text-align:center;
-  color:#ffb6c1;
+#tapScreen h1 {
+  font-family: 'Sacramento', cursive;
+  font-size: 3em;
+  animation: pulse 1.6s infinite;
 }
 
-#message{
-  white-space:pre-wrap;
-  line-height:1.6;
-  margin-top:20px;
+#tapScreen p {
+  font-size: 1.1em;
+  opacity: 0.9;
+}
+
+@keyframes pulse {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* Card */
+#card {
+  display: none;
+  padding: 22px;
+  max-width: 720px;
+  margin: auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+h2 {
+  font-family: 'Sacramento', cursive;
+  font-size: 3.2em;
+  margin-bottom: 12px;
+  text-shadow: 0 0 18px rgba(255,255,255,0.8);
+}
+
+#message {
+  font-size: 1.05em;
+  line-height: 1.9;
+  white-space: pre-line;
+  margin-top: 20px;
+}
+
+.heart {
+  font-size: 2.8em;
+  animation: beat 1.2s infinite;
+  margin: 10px 0;
+}
+
+@keyframes beat {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+}
+
+/* Flower petals (mobile safe) */
+.petal {
+  position: absolute;
+  top: -10vh;
+  pointer-events: none;
+  animation: fall linear infinite;
+  opacity: 0.9;
+}
+
+@keyframes fall {
+  from {
+    transform: translate3d(0,0,0) rotate(0deg);
+  }
+  to {
+    transform: translate3d(0,110vh,0) rotate(360deg);
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div id="tapScreen" onclick="startLove()">Tap to reveal 💕</div>
-
-<div id="card">
-  <h1>For Ainy 🤍</h1>
-  <div id="message"></div>
+<!-- Tap to reveal -->
+<div id="tapScreen" onclick="startLove()">
+  <h1>Tap to reveal 💖</h1>
+  <p>Something special for you, Ainy ✨</p>
 </div>
 
+<!-- Music -->
 <audio id="music" loop preload="auto">
   <source src="ohpenne.mp3" type="audio/mpeg">
 </audio>
 
+<!-- Main content -->
+<div id="card">
+  <div class="heart">💗</div>
+  <h2>Happy Birthday Ainy 🎂</h2>
+
+  <div id="message"></div>
+
+  <div class="heart">💞</div>
+</div>
+
 <script>
-const text = `
-Happy birthday Ainy 💕
+const text = `Happy birthday Ainy 💕
 
 Ik you broke up with me nu…
 but na innum un kooda tha iruken epovum unkaga tha irupen.
@@ -87,29 +150,43 @@ ik this is not a lot but still a little from me.
 Happy ah iru…
 Do everything you like hereafter 🌸
 Nee major aagita…
-wish you the happiest birthday tho🤍
+wish you a happy birthday tho🤍
 
-— your dear Koala 🐨💫
-`;
+— your dear Koala 🐨💫`;
 
-let i=0;
+let i = 0;
 
-function startLove(){
-  document.getElementById("tapScreen").style.display="none";
-  document.getElementById("card").style.display="block";
+function startLove() {
+  document.getElementById("tapScreen").style.display = "none";
+  document.getElementById("card").style.display = "block";
 
-  const music=document.getElementById("music");
+  const music = document.getElementById("music");
   music.load();
-  music.volume=0.7;
-  music.play();
+  music.volume = 0.7;
+  music.play().catch(()=>{});
 
-  const msg=document.getElementById("message");
-  setInterval(()=>{
-    if(i<text.length){
-      msg.innerHTML+=text.charAt(i);
+  createPetals();
+
+  const msg = document.getElementById("message");
+  setInterval(() => {
+    if (i < text.length) {
+      msg.innerHTML += text.charAt(i);
       i++;
     }
-  },35);
+  }, 35);
+}
+
+function createPetals() {
+  const petals = ["🌸","🌷","🌹","💮","🌺"];
+  for (let j = 0; j < 22; j++) {
+    const p = document.createElement("div");
+    p.className = "petal";
+    p.innerText = petals[Math.floor(Math.random() * petals.length)];
+    p.style.left = Math.random() * 100 + "vw";
+    p.style.fontSize = (18 + Math.random() * 16) + "px";
+    p.style.animationDuration = (6 + Math.random() * 6) + "s";
+    document.body.appendChild(p);
+  }
 }
 </script>
 
