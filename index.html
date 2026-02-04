@@ -3,111 +3,68 @@
 <head>
 <meta charset="UTF-8">
 <title>Happy Birthday Ainy 💕</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sacramento&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
 body{
   margin:0;
   height:100vh;
-  background: radial-gradient(circle at top, #ffb6c1, #2b0a2f);
-  font-family:'Poppins', sans-serif;
+  background:linear-gradient(135deg,#1b1b2f,#2a2a40);
+  display:flex;
+  align-items:center;
+  justify-content:center;
   overflow:hidden;
+  font-family:'Poppins',sans-serif;
+  color:#fff;
 }
 
-/* Tap Screen */
 #tapScreen{
-  position:fixed;
+  position:absolute;
   inset:0;
   display:flex;
-  flex-direction:column;
-  justify-content:center;
   align-items:center;
-  color:white;
-  text-align:center;
+  justify-content:center;
+  font-size:2em;
   cursor:pointer;
-  backdrop-filter:blur(8px);
+  background:rgba(0,0,0,0.9);
 }
 
-#tapScreen h1{
-  font-family:'Dancing Script', cursive;
-  font-size:2.6rem;
-  animation:pulse 1.4s infinite;
-}
-
-@keyframes pulse{
-  0%{transform:scale(1);}
-  50%{transform:scale(1.1);}
-  100%{transform:scale(1);}
-}
-
-/* Glass Card */
 #card{
   display:none;
-  max-width:420px;
-  margin:10vh auto;
-  padding:28px 22px;
-  background:rgba(255,255,255,0.18);
-  backdrop-filter:blur(16px);
-  border-radius:26px;
+  background:rgba(255,255,255,0.08);
+  padding:30px;
+  border-radius:20px;
+  max-width:400px;
+  box-shadow:0 0 40px rgba(255,182,193,0.3);
+  backdrop-filter:blur(10px);
+}
+
+h1{
+  font-family:'Sacramento',cursive;
+  font-size:3em;
   text-align:center;
-  color:white;
-  box-shadow:0 25px 50px rgba(0,0,0,0.45);
-  animation:fadeUp 2s ease;
-}
-
-@keyframes fadeUp{
-  from{opacity:0; transform:translateY(50px);}
-  to{opacity:1; transform:translateY(0);}
-}
-
-#card h2{
-  font-family:'Dancing Script', cursive;
-  font-size:2.8rem;
-  margin-bottom:12px;
+  color:#ffb6c1;
 }
 
 #message{
-  font-size:1.05rem;
-  line-height:1.8;
-  white-space:pre-line;
-}
-
-/* Floating hearts & petals */
-.float{
-  position:fixed;
-  bottom:-30px;
-  animation:floatUp linear infinite;
-  pointer-events:none;
-}
-
-@keyframes floatUp{
-  to{
-    transform:translateY(-110vh) rotate(360deg);
-    opacity:0;
-  }
+  white-space:pre-wrap;
+  line-height:1.6;
+  margin-top:20px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- Tap Screen -->
-<div id="tapScreen" onclick="startLove()">
-  <h1>Tap to reveal 💕</h1>
-  <p>Something special for you</p>
-</div>
+<div id="tapScreen" onclick="startLove()">Tap to reveal 💕</div>
 
-<!-- Card -->
 <div id="card">
-  <h2>Happy Birthday Ainy 💕</h2>
+  <h1>For Ainy 🤍</h1>
   <div id="message"></div>
 </div>
 
-<!-- Music -->
-<audio id="music" loop playsinline>
+<audio id="music" loop preload="auto">
   <source src="ohpenne.mp3" type="audio/mpeg">
 </audio>
 
@@ -130,7 +87,7 @@ ik this is not a lot but still a little from me.
 Happy ah iru…
 Do everything you like hereafter 🌸
 Nee major aagita…
-wish you a happy birthday tho🤍
+wish you the happiest birthday tho🤍
 
 — your dear Koala 🐨💫
 `;
@@ -142,32 +99,17 @@ function startLove(){
   document.getElementById("card").style.display="block";
 
   const music=document.getElementById("music");
+  music.load();
   music.volume=0.7;
-  music.play().catch(()=>{});
+  music.play();
 
   const msg=document.getElementById("message");
   setInterval(()=>{
     if(i<text.length){
-      msg.innerHTML += text.charAt(i);
+      msg.innerHTML+=text.charAt(i);
       i++;
     }
   },35);
-
-  createFloating();
-}
-
-function createFloating(){
-  const items=["💗","🌸","💮","🌷"];
-  setInterval(()=>{
-    const el=document.createElement("div");
-    el.className="float";
-    el.innerHTML=items[Math.floor(Math.random()*items.length)];
-    el.style.left=Math.random()*100+"vw";
-    el.style.fontSize=(14+Math.random()*26)+"px";
-    el.style.animationDuration=(6+Math.random()*7)+"s";
-    document.body.appendChild(el);
-    setTimeout(()=>el.remove(),14000);
-  },350);
 }
 </script>
 
